@@ -12,7 +12,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     margin: 0 auto;
-    max-width: 300px;
+    max-width: 400px;
     padding: 2em 2em 4em;
 }
 
@@ -38,15 +38,24 @@ samp {
     display: none;
 }
 
-img {
-    animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
-    background: transparent;
-    border: 10px solid rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-    display: block;
-    margin: 1.3em auto;
-    max-width: 95%;
+.wrap{
+  display:flex;
 }
+
+
+.iconimg{
+    width: 30%;
+    margin: 0 auto;
+    transition: 3s;
+}
+
+.iconimg:hover {
+   transform: rotateX(360deg); 
+}
+
+
+
+
 
 @keyframes colorize {
     0% {
@@ -58,6 +67,7 @@ img {
         filter: grayscale(0%);
     }
 }
+
 
 
 .css-button-grey {
@@ -95,3 +105,4 @@ img {
   right: -20px;
   transition: 0.4s;
 }
+
