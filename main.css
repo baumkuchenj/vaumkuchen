@@ -87,6 +87,8 @@ samp {
   background-color: #6c757d
 }
 .css-button-grey:hover {
+  content: "\00BB";
+  background-color: #ffb6c1;
   border-radius: 5px;
   padding-right: 24px;
   padding-left:8px;
