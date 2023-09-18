@@ -21,6 +21,7 @@ body {
     
 }
 
+
 h1{
     color: #222;
     font-weight: 600;
@@ -82,43 +83,47 @@ samp {
 }
 
 
-.css-button{
-  font-size: medium;
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  margin: 0 auto;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-  font-family: 'Amatic SC', cursive;
-  border-radius: 20px;
-  letter-spacing: 0px;
+.css-button a {    
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 200px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 600;
 }
-.css-button:hover{
-  background:#fff;
-  color:#1AAB8A;
+
+.css-button a:before {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: rgba(0,0,0,.1);
+    transform: translateX(-50%);
 }
-.css-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
+.css-button a:after {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #000;
+    transform: scale(0, 1);
+    transform-origin: left top;
+    transition: transform .3s;
 }
-.css-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
+
+.css-button a:hover {
+    opacity: 0.7;
+
 }
-.css-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
+.css-button a:hover:after {
+    transform: scale(1, 1);
 }
+
