@@ -18,8 +18,26 @@ body {
     margin: 0 auto;
     max-width: 400px;
     padding: 2em 2em 4em;
-    
+        
 }
+
+div#main{
+    background: url("baumkuchen.png") no-repeat 0 0/cover ;
+}
+
+
+div#    details{
+  position: absolute;
+  top:0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 600px;
+  height: 50px;
+  margin: auto;
+  font-size: 50px;
+}
+
 
 
 h1{
@@ -84,46 +102,35 @@ samp {
 
 
 .css-button a {    
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 200px;
-    padding: 10px 25px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 600;
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	width: 120px;
+	margin: auto;
+	padding: 1rem 4rem;
+	font-weight: bold;
+	color: #000000;
+	transition: 0.5s;
 }
 
-.css-button a:before {
-    position: absolute;
-    bottom: 0px;
-    left: 50%;
-    content: '';
-    width: 100%;
-    height: 2px;
-    background: rgba(0,0,0,.1);
-    transform: translateX(-50%);
-}
-.css-button a:after {
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    content: '';
-    width: 100%;
-    height: 2px;
-    background: #000;
-    transform: scale(0, 1);
-    transform-origin: left top;
-    transition: transform .3s;
-}
 
 .css-button a:hover {
-    opacity: 0.7;
+   	color: #fff;
+	background: #27acd9;
 
 }
-.css-button a:hover:after {
-    transform: scale(1, 1);
+
+ul {
+  width: 80%;
+  column-count: 3;
+  column-gap: 16px;
 }
 
+ul li {
+  break-inside: avoid;
+  margin-bottom: 8px;
+  padding: 8px;
+  background-color: royalblue;
+  color: #fff;
+}
