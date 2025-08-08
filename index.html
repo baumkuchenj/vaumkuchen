@@ -1,50 +1,90 @@
 <!DOCTYPE html>
-<html lang="ja">
-    
-    <head>
-        <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
-        
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Language" content="ja">
-        <meta name="google" content="notranslate">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Baumkuchen</title>
-        <meta name="description" content="An interactive getting started guide for Brackets.">
-        <link rel="stylesheet" href="main.css">
-        
-    </head>
-    <body>
-    <div id="main">
-        <div id="deteils">
-           <div id="content">
-        <div class="wrap">
-        <h1>Baumkuchen</h1>
-                
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baumkuchen</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <header class="header">
+        <div class="profile-section">
+          <div class="profile-image">
+            <img src="profile-icon.png" />
+          </div>
+          <h1 class="name">Baumkuchen</h1>
+          <p class="bio">
+            ねこ〜🐾多趣味です⚡ <br />謎解き、マダミス、ボドゲ、写真など。
+          </p>
         </div>
-        <br>
-   
-        <div class="css-button" >             
-            <a href="https://twitter.com/_Vaumkuchen_">
-               <i class="fa-brands fa-square-x-twitter fa-2xl"></i>
-            </a>                    
-         
-            <a href="https://twpf.jp/_Vaumkuchen_">  
-                <i class="fa-solid fa-user-secret fa-2xl"></i>
-            </a> 
-  
-            
-            <a href="https://min.togetter.com/JaG3xQe">
-                <i class="fa-solid fa-person-through-window fa-rotate-90 fa-2xl"></i>
-            </a> 
+      </header>
+
+      <!-- Social Media Links -->
+      <section class="social-media">
+        <h2>Connect with me</h2>
+        <div class="social-links">
+          <a href="https://x.com/_Vaumkuchen_" class="social-link twitter">
+            <i class="fab fa-twitter"></i>
+            <span>X</span>
+          </a>
+          <a
+            href="https://www.instagram.com/tana_catgram/"
+            class="social-link instagram"
+          >
+            <i class="fab fa-instagram"></i>
+            <span>🐈🐈 Instagram</span>
+          </a>
+
+          <a
+            href="https://posfie.com/@_Vaumkuchen_/p/JaG3xQe"
+            class="social-link twitter"
+          >
+            <i class="fa-solid fa-file-contract"></i>
+            <span>Summary (Riddle Participation)</span>
+          </a>
         </div>
-        
-        <script src="main.js"></script>
-        <script src="js/anime.min.js" defer></script>
-               </div>
-            </div>
+      </section>
+
+      <section class="game-section">
+        <h2><i class="fas fa-search"></i> プレイ済みマダミス</h2>
+        <div class="game-contents">
+          <script>
+            fetch(
+              "https://gsx2json.com/api?id=18FcD90JW2Tie2-G0qXrchqhPHDOBWC9LTFxxzbv1_dM&sheet=baumkuchenmystery"
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                const entries = data.rows;
+                const container = document.getElementById("topics");
+
+                entries.forEach((entry) => {
+                  const p = document.createElement("p");
+                  p.textContent = `${entry.no || ""} : ${entry.date || ""} : ${
+                    entry.title || ""
+                  }`.trim();
+
+                  container.appendChild(p);
+                });
+              });
+          </script>
+
+          <div id="topics"></div>
         </div>
-    </body>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>&copy; 2025 Baumkuchen.</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
-
-
-
