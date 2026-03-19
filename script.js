@@ -201,28 +201,45 @@ function getTweetId(url) {
   }
 }
 
-const embedObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      embedObserver.unobserve(entry.target);
+function loadTweetEmbed(el) {
+  if (!el || el.dataset.embedLoaded === "true") return;
+  const tweetId = el.dataset.tweetId;
+  if (!tweetId) return;
 
-      const el = entry.target;
-      const tweetId = el.dataset.tweetId;
-      if (!tweetId) return;
+  el.dataset.embedLoaded = "true";
 
-      ensureTwitterWidgets()
-        .then((twttr) => twttr.widgets.createTweet(tweetId, el, { dnt: true }))
-        .then(() => el.classList.remove("tweet-loading"))
-        .catch(() => {
-          el.classList.remove("tweet-loading");
-          el.classList.add("tweet-error");
-          el.innerHTML = '<span class="embed-error-msg">埋め込みを表示できませんでした。</span>';
-        });
+  ensureTwitterWidgets()
+    .then((twttr) => twttr.widgets.createTweet(tweetId, el, { dnt: true }))
+    .then(() => el.classList.remove("tweet-loading"))
+    .catch(() => {
+      el.classList.remove("tweet-loading");
+      el.classList.add("tweet-error");
+      el.innerHTML = '<span class="embed-error-msg">埋め込みを表示できませんでした。</span>';
     });
-  },
-  { rootMargin: "200px 0px" }
-);
+}
+
+function togglePuzzleEmbed(toggleButton, embedWrap) {
+  if (!toggleButton || !embedWrap) return;
+
+  const isCollapsed = embedWrap.classList.contains("is-collapsed");
+  if (isCollapsed) {
+    embedWrap.classList.remove("is-collapsed");
+    toggleButton.classList.add("is-open");
+    toggleButton.setAttribute("aria-expanded", "true");
+    toggleButton.textContent = "▲";
+
+    if (embedWrap.dataset.embedLoaded !== "true") {
+      embedWrap.classList.add("tweet-loading");
+      loadTweetEmbed(embedWrap);
+    }
+    return;
+  }
+
+  embedWrap.classList.add("is-collapsed");
+  toggleButton.classList.remove("is-open");
+  toggleButton.setAttribute("aria-expanded", "false");
+  toggleButton.textContent = "▼";
+}
 
 function renderPuzzleList() {
   if (!puzzleList) return;
@@ -259,29 +276,51 @@ function renderPuzzleList() {
     const header = document.createElement("div");
     header.className = "puzzle-item-head";
 
-    const titleEl = document.createElement("span");
-    titleEl.className = "puzzle-title";
     const tweetId = getTweetId(item.url);
-    titleEl.textContent = item.title || (tweetId ? `投稿 ${tweetId}` : "投稿");
+    const titleLabel = item.title || (tweetId ? `投稿 ${tweetId}` : "投稿");
+
+    const titleGroup = document.createElement("div");
+    titleGroup.className = "puzzle-title-group";
+
+    const titleEl = document.createElement(item.url ? "a" : "span");
+    titleEl.className = item.url ? "puzzle-title puzzle-title-link" : "puzzle-title";
+    titleEl.textContent = titleLabel;
+    if (item.url) {
+      titleEl.href = item.url;
+      titleEl.target = "_blank";
+      titleEl.rel = "noreferrer";
+    }
+
+    titleGroup.appendChild(titleEl);
 
     const meta = document.createElement("span");
     meta.textContent = item.date || "";
 
-    header.appendChild(titleEl);
+    header.appendChild(titleGroup);
     header.appendChild(meta);
-    li.appendChild(header);
 
     if (tweetId) {
       const embedWrap = document.createElement("div");
-      embedWrap.className = "puzzle-embed tweet-loading";
+      embedWrap.className = "puzzle-embed is-collapsed";
       embedWrap.dataset.tweetId = tweetId;
-      embedObserver.observe(embedWrap);
+
+      const toggleButton = document.createElement("button");
+      toggleButton.className = "puzzle-toggle";
+      toggleButton.type = "button";
+      toggleButton.textContent = "▼";
+      toggleButton.setAttribute("aria-expanded", "false");
+      toggleButton.setAttribute("aria-label", `${titleLabel} の埋め込みを表示`);
+      toggleButton.addEventListener("click", () => {
+        togglePuzzleEmbed(toggleButton, embedWrap);
+      });
+
+      titleGroup.appendChild(toggleButton);
+      li.appendChild(header);
       li.appendChild(embedWrap);
     } else if (item.url) {
-      const embedWrap = document.createElement("div");
-      embedWrap.className = "puzzle-embed tweet-error";
-      embedWrap.innerHTML = '<span class="embed-error-msg">埋め込みを表示できませんでした。</span>';
-      li.appendChild(embedWrap);
+      li.appendChild(header);
+    } else {
+      li.appendChild(header);
     }
 
     puzzleList.appendChild(li);

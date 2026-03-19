@@ -10,11 +10,15 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://platform.twitter.com" />
+    <link rel="preconnect" href="https://syndication.twimg.com" crossorigin />
+    <link rel="dns-prefetch" href="//platform.twitter.com" />
+    <link rel="dns-prefetch" href="//syndication.twimg.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260318-1" />
+    <link rel="stylesheet" href="./styles.css?v=20260319-2" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body class="simple-layout">
@@ -33,11 +37,22 @@
           趣味をまとめました。
           <br>
           マダミス / 謎解き / ボードゲーム など
+          <br>
+          誘うときの参考にしてください
         </p>
         <div class="simple-actions">
-          <a class="simple-square" href="https://x.com/_Vaumkuchen_" target="_blank" rel="noreferrer"><i class="fa-brands fa-square-x-twitter"></i></a>
-          <a class="simple-square" href="#puzzles"><i class="fa-solid fa-book"></i></a>
-          <a class="simple-square" href="#madamis"><i class="fa-solid fa-question"></i></a>
+          <a class="hero-link hero-link-primary" href="https://x.com/_Vaumkuchen_" target="_blank" rel="noreferrer">
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+            <span>X</span>
+          </a>
+          <a class="hero-link" href="#puzzles">
+            <i class="fa-solid fa-book" aria-hidden="true"></i>
+            <span>通過した謎解き</span>
+          </a>
+          <a class="hero-link" href="#madamis">
+            <i class="fa-solid fa-user-secret" aria-hidden="true"></i>
+            <span>通過したマダミス</span>
+          </a>
         </div>
       </div>
     </header>
@@ -49,7 +64,6 @@
         <div class="section-head">
           <div>
             <h2>通過済謎解き・脱出ゲーム</h2>
-            <p class="section-note">謎解き・脱出ゲームの記録をまとめています。</p>
           </div>          
         </div>
         <div class="section-search">
@@ -100,6 +114,6 @@
       <p>&copy; <span id="year"></span> Baumkuchen</p>
     </footer>
 
-    <script src="./script.js?v=20260318-1"></script>
+    <script src="./script.js?v=20260319-2"></script>
   </body>
 </html>
